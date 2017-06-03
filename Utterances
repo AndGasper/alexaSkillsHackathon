@@ -13,6 +13,22 @@ StatusCheckIntent:
     does {websiteName} exist
     is {websiteName} online
     is {websiteName offline
+    the status of {websiteName} is
+    what is the status of {websiteName}
+    is {websiteName} running
+    is {websiteName} down
+    {websiteName} not working
+    {websiteName} disconnected
+    {websiteName} broken
+    {websiteName} not exist
+    {websiteName} up
+    {websiteName} working
+    {websiteName} connected
+    {websiteName} fixed
+    {websiteName} exist
+    {websiteName} online
+    {websiteName offline
+
 
 HelpIntent:
     "You can use commands such at asking 'is google down' or 'is amazon.com online'."
