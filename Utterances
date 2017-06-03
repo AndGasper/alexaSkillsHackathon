@@ -13,3 +13,9 @@ StatusCheckIntent:
     does {websiteName} exist
     is {websiteName} online
     is {websiteName offline
+
+HelpIntent:
+    "You can use commands such at asking 'is google down' or 'is amazon.com online'."
+
+StopIntent:
+    "Goodbye, Thank you for using IsItDown."
