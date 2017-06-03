@@ -4,7 +4,37 @@
 
 'use strict';
 
+const statusCheck = require('./statusCheck');
+
 const Alexa = require('alexa-sdk');
+const https = require('https');
+
+
+const APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
+
+const languageStrings = {
+    'en': {
+        translation: {
+            SITE_LIST: {
+                // List of sites go here
+            },
+            SKILL_NAME: 'Is It Down',
+            GET_FACT_MESSAGE: "Here's your fact: ",
+            HELP_MESSAGE: 'You can say tell me a space fact, or, you can say exit... What can I help you with?',
+            HELP_REPROMPT: 'What can I help you with?',
+            STOP_MESSAGE: 'Goodbye!',
+            STATUS_MESSAGE: "That site is"
+        },
+    },
+    'en-US': {
+        translation: {
+           SITELIST: {
+               //TODO Put sites here
+           },
+            SKILL_NAME: 'American Space Facts',
+        },
+    }
+};
 const handlers = {
     'LaunchRequest': function () {
         this.emit('GetFact');
@@ -15,16 +45,15 @@ const handlers = {
         console.log("website");
         this.emit(':tell', 'BLAH!');
 
-    },
-    'GetFact': function () {
-        // Get a random space fact from the space facts list
-        // Use this.t() to get corresponding language data
-        const factArr = this.t('FACTS');
-        const factIndex = Math.floor(Math.random() * factArr.length);
-        const randomFact = factArr[factIndex];
-        // Create speech output
-        const speechOutput = this.t('GET_FACT_MESSAGE') + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), randomFact);
+    'statusCheck': function(){
+
+        statusCheck(baseurl, url, (result) => {
+            console.log("payload:",baseurl);
+            console.log("sent:",url);
+            console.log("received:",result);
+
+            this.emit(':tell',result);
+        });
     },
     'AMAZON.HelpIntent': function () {
         const speechOutput = this.t('HELP_MESSAGE');
