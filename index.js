@@ -10,6 +10,8 @@
 
 'use strict';
 
+const statusCheck = require('./statusCheck');
+
 const Alexa = require('alexa-sdk');
 const https = require('https');
 
@@ -21,7 +23,7 @@ const languageStrings = {
         translation: {
             SITE_LIST: {
                 // List of sites go here
-            }
+            },
             SKILL_NAME: 'Is It Down',
             GET_FACT_MESSAGE: "Here's your fact: ",
             HELP_MESSAGE: 'You can say tell me a space fact, or, you can say exit... What can I help you with?',
@@ -45,6 +47,10 @@ const languageStrings = {
 const handlers = {
     'LaunchRequest': function () {
         this.emit('GetFact');
+    },
+
+    'statusCheck': function(){
+        statusCheck(url);
     },
 
     'AMAZON.HelpIntent': function () {
