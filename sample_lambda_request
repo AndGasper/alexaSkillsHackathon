@@ -1,0 +1,63 @@
+{
+  "session": {
+    "sessionId": "SessionId.47dcb6a8-b8da-419c-9a14-9539f1993b1d",
+    "application": {
+      "applicationId": "amzn1.ask.skill.3c3f2f89-70f4-4c91-989e-0a5930a7f860"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AHBVWAGLUPGBTRQ3ICPM5LV5DPTVE6QWIO5YKTCVBXP5TRT52IFI5PJ2PMGARYNIVJSOFTT7CQSVNNFYGXVEFZBUPOS4X64O64EUBAEVFFYQHPZTLBW23WL4LF7WFDGVZ6VGYDEVQYEWV6TUYV2ARDMSP2MKFD6NVFR6K7ESY4BMRFGBX525V2XU4WIHGELHGRGG3XMTIDEXBYA"
+    },
+    "new": true
+  },
+  "request": {
+    "type": "Int{
+                  "session": {
+                    "sessionId": "SessionId.47dcb6a8-b8da-419c-9a14-9539f1993b1d",
+                    "application": {
+                      "applicationId": "amzn1.ask.skill.3c3f2f89-70f4-4c91-989e-0a5930a7f860"
+                    },
+                    "attributes": {},
+                    "user": {
+                      "userId": "amzn1.ask.account.AHBVWAGLUPGBTRQ3ICPM5LV5DPTVE6QWIO5YKTCVBXP5TRT52IFI5PJ2PMGARYNIVJSOFTT7CQSVNNFYGXVEFZBUPOS4X64O64EUBAEVFFYQHPZTLBW23WL4LF7WFDGVZ6VGYDEVQYEWV6TUYV2ARDMSP2MKFD6NVFR6K7ESY4BMRFGBX525V2XU4WIHGELHGRGG3XMTIDEXBYA"
+                    },
+                    "new": true
+                  },
+                  "request": {
+                    "type": "IntentRequest",
+                    "requestId": "EdwRequestId.ad6baba1-8753-41c9-a08c-97277b60295d",
+                    "locale": "en-US",
+                    "timestamp": "2017-06-03T19:46:12Z",
+                    "intent": {
+                      "name": "CheckStatus",
+                      "slots": {
+                        "Date": {
+                          "name": "Date"
+                        },
+                        "url": {
+                          "name": "url",
+                          "value": "reddit"
+                        }
+                      }
+                    }
+                  },
+                  "version": "1.0"
+                }entRequest",
+    "requestId": "EdwRequestId.ad6baba1-8753-41c9-a08c-97277b60295d",
+    "locale": "en-US",
+    "timestamp": "2017-06-03T19:46:12Z",
+    "intent": {
+      "name": "CheckStatus",
+      "slots": {
+        "Date": {
+          "name": "Date"
+        },
+        "url": {
+          "name": "url",
+          "value": "reddit"
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
