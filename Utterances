@@ -11,4 +11,5 @@ StatusCheckIntent:
     is {websiteName} connected
     is {websiteName} fixed
     does {websiteName} exist
-    is {websiteName}
+    is {websiteName} online
+    is {websiteName offline
