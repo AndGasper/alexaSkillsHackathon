@@ -1,0 +1,14 @@
+To begin using skill: Alexa open isitdown
+
+StatusCheckIntent:
+    is {websiteName} down
+    is {websiteName} not working
+    is {websiteName} disconnected
+    is {websiteName} broken
+    does {websiteName} not exist
+    is {websiteName} up
+    is {websiteName} working
+    is {websiteName} connected
+    is {websiteName} fixed
+    does {websiteName} exist
+    is {websiteName}
