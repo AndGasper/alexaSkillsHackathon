@@ -56,7 +56,7 @@ const handlers = {
             console.log("sent:",url);
             console.log("received:",result);
 
-            this.emit(':tell',result`);
+            this.emit(':tell',result);
         });
     },
 
