@@ -50,7 +50,14 @@ const handlers = {
     },
 
     'statusCheck': function(){
-        statusCheck(url);
+
+        statusCheck(baseurl, url, (result) => {
+            console.log("payload:",baseurl);
+            console.log("sent:",url);
+            console.log("received:",result);
+
+            this.emit(':tell',result`);
+        });
     },
 
     'AMAZON.HelpIntent': function () {
