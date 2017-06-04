@@ -1,15 +1,16 @@
-To begin using skill: Alexa open isitdown
+Name: Site Status Check
+Invocation Name: status check
+CheckStatus is {url} down
+CheckStatus is {url} not working
+CheckStatus is {url} disconnected
+CheckStatus is {url} broken
+CheckStatus does {url} not exist
+CheckStatus is {url} up
+CheckStatus is {url} working
+CheckStatus is {url} connected
+CheckStatus is {url} fixed
+CheckStatus does {url} exist
+CheckStatus is {url} online
+CheckStatus is {url} offline
 
-CheckStatus:
-    is {websiteName} down
-    is {websiteName} not working
-    is {websiteName} disconnected
-    is {websiteName} broken
-    does {websiteName} not exist
-    is {websiteName} up
-    is {websiteName} working
-    is {websiteName} connected
-    is {websiteName} fixed
-    does {websiteName} exist
-    is {websiteName} online
-    is {websiteName offline
+AMAZON.HelpIntent how do I into the internet

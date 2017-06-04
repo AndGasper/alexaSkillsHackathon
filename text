@@ -1,5 +1,14 @@
 {
-  "intents": {
+  "intents": [
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
     {
       "intent": "AMAZON.ResumeIntent"
     },
@@ -7,15 +16,17 @@
       "intent": "AMAZON.PauseIntent"
     },
     {
-      "slots": {
-        "url": {
+      "intent": "CheckStatus",
+      "slots": [
+        {
           "name": "url",
           "type": "LIST_OF_SITES"
         },
-        "date": {
+        {
           "name": "Date",
           "type": "AMAZON.DATE"
         }
-    },
-      "intent": "CheckStatus"
+      ]
+    }
+  ]
 }

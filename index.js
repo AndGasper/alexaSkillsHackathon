@@ -6,7 +6,7 @@
 
 const Alexa = require('alexa-sdk');
 const https = require('https');
-console.log('hello');
+
 // Or statement for the cases?
 function httpsGet(url, callback) {
 
@@ -21,7 +21,7 @@ function httpsGet(url, callback) {
         port: 443,
         path: '/',
         method: 'GET'
-};
+    };
 
     const req = https.request(options, res => {
         res.setEncoding('utf8');
@@ -100,30 +100,27 @@ function httpsGet(url, callback) {
 
 }
 const handlers = {
-'LaunchRequest': function () {
-    this.emit('GetFact');
-},
-'CheckStatus': function () {
-    const url = this.event.request.intent.slots.url.value;
-    httpsGet(url,  (message) => {
-            // console.log(“sent     : ” + myRequest);
+    'LaunchRequest': function () {
+        this.emit('GetFact');
+    },
+    'CheckStatus': function () {
+        const url = this.event.request.intent.slots.url.value;
+        httpsGet(url,  (message) => {
+                this.emit(':tell', message);
+            }
+        );
 
-            this.emit(':tell', message);
-        }
-    );
-
-},
-'AMAZON.HelpIntent': function () {
-    const speechOutput = this.t('HELP_MESSAGE');
-    const reprompt = this.t('HELP_MESSAGE');
-    this.emit(':ask', speechOutput, reprompt);
-},
-'AMAZON.CancelIntent': function () {
-    this.emit(':tell', this.t('STOP_MESSAGE'));
-},
-'AMAZON.StopIntent': function () {
-    this.emit(':tell', this.t('STOP_MESSAGE'));
-},
+    },
+    'AMAZON.HelpIntent': function () {
+        const speechOutput = "You can say things like: 'Is facebook down?' or 'is google broken'";
+        this.emit(':tell', speechOutput);
+    },
+    'AMAZON.CancelIntent': function () {
+        this.emit(':tell', "Goodbye");
+    },
+    'AMAZON.StopIntent': function () {
+        this.emit(':tell', "Goodbye");
+    },
 };
 
 exports.handler = function (event, context) {
