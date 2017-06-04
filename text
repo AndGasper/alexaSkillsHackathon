@@ -1,0 +1,21 @@
+{
+  "intents": {
+    {
+      "intent": "AMAZON.ResumeIntent"
+    },
+    {
+      "intent": "AMAZON.PauseIntent"
+    },
+    {
+      "slots": {
+        "url": {
+          "name": "url",
+          "type": "LIST_OF_SITES"
+        },
+        "date": {
+          "name": "Date",
+          "type": "AMAZON.DATE"
+        }
+    },
+      "intent": "CheckStatus"
+}

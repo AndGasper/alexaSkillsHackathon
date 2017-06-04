@@ -1,48 +1,133 @@
 /* eslint-disable  func-names */
-/* eslint quote-props: ["error", "consistent"]*/
+/* eslint quote-props: [“error”, “consistent”]*/
 
 
 'use strict';
 
 const Alexa = require('alexa-sdk');
-const handlers = {
-    'LaunchRequest': function () {
-        this.emit('GetFact');
-    },
-    'CheckStatus': function () {
-        const requestInfo = this.event.request.intent.slots;
-        const website = requestInfo.url;
-        console.log("website");
-        this.emit(':tell', 'BLAH!');
+const https = require('https');
+console.log('hello');
+// Or statement for the cases?
+function httpsGet(url, callback) {
 
-    },
-    'GetFact': function () {
-        // Get a random space fact from the space facts list
-        // Use this.t() to get corresponding language data
-        const factArr = this.t('FACTS');
-        const factIndex = Math.floor(Math.random() * factArr.length);
-        const randomFact = factArr[factIndex];
-        // Create speech output
-        const speechOutput = this.t('GET_FACT_MESSAGE') + randomFact;
-        this.emit(':tellWithCard', speechOutput, this.t('SKILL_NAME'), randomFact);
-    },
-    'AMAZON.HelpIntent': function () {
-        const speechOutput = this.t('HELP_MESSAGE');
-        const reprompt = this.t('HELP_MESSAGE');
-        this.emit(':ask', speechOutput, reprompt);
-    },
-    'AMAZON.CancelIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
-    },
-    'AMAZON.StopIntent': function () {
-        this.emit(':tell', this.t('STOP_MESSAGE'));
-    },
+    // GET is a web service request that is fully defined by a URL string
+    // Try GET in your browser:
+    // https://cp6gckjt97.execute-api.us-east-1.amazonaws.com/prod/stateresource?usstate=New%20Jersey
+
+
+    // Update these options with the details of the web service you would like to call
+    const options = {
+        host: `www.${url}.com`,
+        port: 443,
+        path: '/',
+        method: 'GET'
+};
+
+    const req = https.request(options, res => {
+        res.setEncoding('utf8');
+        var returnData = '';
+        let code = res.statusCode;
+        let message = url;
+
+        switch(code) {
+            case 200:
+            case 201:
+            case 202:
+                message += ' is up and running';
+                break;
+            case 204:
+            case 205:
+            case 206:
+                message += ` has partial or no content`;
+                break;
+            case 300:
+            case 301:
+                message += ` is permanently moved to ${res.headers.location}`;
+                break;
+            case 302:
+            case 308:
+                message += ` permanently redirects to ${res.headers.location}`;
+                break;
+            case 303:
+            case 304:
+            case 305:
+            case 306:
+            case 307:
+                message += ` has been redirected to another location`;
+                break;
+            case 400:
+                message = `That was a bad request`;
+                break;
+            case 401:
+                message = `I am unauthorized to access this site without proper authentication`;
+                break;
+            case 403:
+                message = `I am forbidden from access this site`;
+                break;
+            case 404:
+                message = `I can not find that site`;
+                break;
+            case 418:
+                message = `I'm a little teapot, short and stout.  Here is my handle, here is my spout.`;
+            case 500:
+            case 501:
+            case 502:
+            case 503:
+            case 504:
+            case 505:
+            case 506:
+            case 507:
+            case 508:
+            case 510:
+            case 511:
+                message += ` is down right now`;
+                break;
+            default:
+                message = `Unknown status code ${code}`
+        }
+
+        res.on('data', chunk => {
+            // returnData = returnData + chunk;
+        });
+
+        res.on('end', () => {
+            callback(message);  // this will execute whatever function the caller defined, with one argument
+
+        });
+
+    });
+    req.end();
+
+}
+const handlers = {
+'LaunchRequest': function () {
+    this.emit('GetFact');
+},
+'CheckStatus': function () {
+    const url = this.event.request.intent.slots.url.value;
+    httpsGet(url,  (message) => {
+            // console.log(“sent     : ” + myRequest);
+
+            this.emit(':tell', message);
+        }
+    );
+
+},
+'AMAZON.HelpIntent': function () {
+    const speechOutput = this.t('HELP_MESSAGE');
+    const reprompt = this.t('HELP_MESSAGE');
+    this.emit(':ask', speechOutput, reprompt);
+},
+'AMAZON.CancelIntent': function () {
+    this.emit(':tell', this.t('STOP_MESSAGE'));
+},
+'AMAZON.StopIntent': function () {
+    this.emit(':tell', this.t('STOP_MESSAGE'));
+},
 };
 
 exports.handler = function (event, context) {
     const alexa = Alexa.handler(event, context);
-
-    // To enable string internationalization (i18n) features, set a resources object.
     alexa.registerHandlers(handlers);
     alexa.execute();
 };

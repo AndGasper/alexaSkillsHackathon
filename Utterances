@@ -1,6 +1,6 @@
 To begin using skill: Alexa open isitdown
 
-StatusCheckIntent:
+CheckStatus:
     is {websiteName} down
     is {websiteName} not working
     is {websiteName} disconnected
