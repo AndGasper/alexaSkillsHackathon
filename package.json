@@ -1,0 +1,23 @@
+{
+  "name": "alexaSkillsHackathon",
+  "version": "1.0.0",
+  "description": "Amazon Alexa Hackathon 06/03/2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndGasper/alexaSkillsHackathon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndGasper/alexaSkillsHackathon/issues"
+  },
+  "homepage": "https://github.com/AndGasper/alexaSkillsHackathon#readme",
+  "dependencies": {
+    "alexa-sdk": "^1.0.9"
+  }
+}
