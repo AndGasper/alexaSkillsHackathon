@@ -1,0 +1,27 @@
+CheckStatus is {url} down
+CheckStatus is {url} not working
+CheckStatus is {url} disconnected
+CheckStatus is {url} broken
+CheckStatus does {url} not exist
+CheckStatus is {url} up
+CheckStatus is {url} working
+CheckStatus is {url} connected
+CheckStatus is {url} fixed
+CheckStatus does {url} exist
+CheckStatus is {url} online
+CheckStatus is {url} offline
+CheckStatus the status of {url} is
+CheckStatus what is the status of {url}
+CheckStatus is {url} running
+CheckStatus is {url} down
+CheckStatus {url} not working
+CheckStatus {url} disconnected
+CheckStatus {url} broken
+CheckStatus {url} not exist
+CheckStatus {url} up
+CheckStatus {url} working
+CheckStatus {url} connected
+CheckStatus {url} fixed
+CheckStatus {url} exist
+CheckStatus {url} online
+CheckStatus {url} offline

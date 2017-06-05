@@ -44,7 +44,7 @@ const handlers = {
         const website = requestInfo.url;
         console.log("website");
         this.emit(':tell', 'BLAH!');
-
+    },
     'statusCheck': function(){
 
         statusCheck(baseurl, url, (result) => {
