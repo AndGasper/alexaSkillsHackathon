@@ -7,17 +7,18 @@
 const Alexa = require('alexa-sdk');
 const https = require('https');
 
-// Or statement for the cases?
+function normalizeURL(url) {
+    let formattedURL = '';
+    (url.slice(-4) === '.com') ? (formattedURL = url.slice(0,-4)) : (formattedURL = url); // if the .com domain suffix was present, remove it, else, assign the url to the formattedURL;
+    (formattedURL.slice(0,4) === 'www.') ? (formattedURL = formattedURL.slice(4)) : (formattedURL = formattedURL); // redundant, but explicit;
+    return formattedURL;
+}
 function httpsGet(url, callback) {
-
-    // GET is a web service request that is fully defined by a URL string
-    // Try GET in your browser:
-    // https://cp6gckjt97.execute-api.us-east-1.amazonaws.com/prod/stateresource?usstate=New%20Jersey
-
-
+    // Only need the status code, so GET will suffice;
     // Update these options with the details of the web service you would like to call
+    let formattedURL = normalizeURL(url); // normalizeURL returns just the
     const options = {
-        host: `www.${url}.com`,
+        host: `www.${formattedURL}.com`,
         port: 443,
         path: '/',
         method: 'GET'
@@ -101,15 +102,18 @@ function httpsGet(url, callback) {
 }
 const handlers = {
     'LaunchRequest': function () {
-        this.emit('GetFact');
+        this.emit('AMAZON.HelpIntent'); // emit the AMAZON.HelpIntent since the user did not specify an action
     },
     'CheckStatus': function () {
         const url = this.event.request.intent.slots.url.value;
-        httpsGet(url,  (message) => {
+        let urlPotentialSuffix = url.slice(-4); // Store the last 4 characters of the passed url to a variable, so the value is not recomputed on each OR statement
+        if (urlPotentialSuffix=== '.org' || urlPotentialSuffix === '.net' || urlPotentialSuffix === '.int' || urlPotentialSuffix === '.edu' || urlPotentialSuffix === '.gov' || urlPotentialSuffix === '.mil') {
+            this.emit(':tell', "Site Status Check currently only supports dot com domains");
+        } else {
+            httpsGet(url,  (message) => {
                 this.emit(':tell', message);
-            }
-        );
-
+            });
+        }
     },
     'AMAZON.HelpIntent': function () {
         const speechOutput = "You can say things like: 'Is facebook down?' or 'is google broken'";
