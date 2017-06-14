@@ -43,11 +43,11 @@ function httpsGet(url, callback) {
                 break;
             case 300:
             case 301:
-                message += ` is permanently moved to ${res.headers.location}`;
+                message += ` tried to redirect me somewhere else...Not sure what to tell you about that`;
                 break;
             case 302:
             case 308:
-                message += ` permanently redirects to ${res.headers.location}`;
+                message += ` tried to redirect me somewhere else...Not sure what to tell you about that`;
                 break;
             case 303:
             case 304:
@@ -57,7 +57,7 @@ function httpsGet(url, callback) {
                 message += ` has been redirected to another location`;
                 break;
             case 400:
-                message = `That was a bad request`;
+                message = `The site you have requested does not seem to want to take our request at this time.`;
                 break;
             case 401:
                 message = `I am unauthorized to access this site without proper authentication`;
@@ -102,14 +102,16 @@ function httpsGet(url, callback) {
 }
 const handlers = {
     'LaunchRequest': function () {
-        this.emit('AMAZON.HelpIntent'); // emit the AMAZON.HelpIntent since the user did not specify an action
+        this.emit(':tell', "You can say things like, Ask status check: is facebook up?");
     },
     'CheckStatus': function () {
-        const url = this.event.request.intent.slots.url.value;
+        let url = this.event.request.intent.slots.url.value;
+        url = url.toLowerCase(); // toLowerCase fixes issue with netflix. For some reason, it was taking "Netflix" as the URL.
         let urlPotentialSuffix = url.slice(-4); // Store the last 4 characters of the passed url to a variable, so the value is not recomputed on each OR statement
         if (urlPotentialSuffix=== '.org' || urlPotentialSuffix === '.net' || urlPotentialSuffix === '.int' || urlPotentialSuffix === '.edu' || urlPotentialSuffix === '.gov' || urlPotentialSuffix === '.mil') {
             this.emit(':tell', "Site Status Check currently only supports dot com domains");
         } else {
+            let test = `You said: <say-as interpret-as="spell-out">${url}</say-as>`;
             httpsGet(url,  (message) => {
                 this.emit(':tell', message);
             });
